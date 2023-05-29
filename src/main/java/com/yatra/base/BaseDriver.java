@@ -56,6 +56,7 @@ public class BaseDriver {
 	}
 	@AfterSuite
 	public void afterSuite() {
+		System.out.println("report generater");
 		ExtentManager.endExtent();
 	}
 }
