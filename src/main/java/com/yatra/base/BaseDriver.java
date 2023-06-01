@@ -26,10 +26,10 @@ public class BaseDriver {
 	public void loadConfig() throws IOException {
 	ExtentManager.setExtent();
 	DOMConfigurator.configure("log4j.xml");
-		prop = new Properties();
-		fis = new FileInputStream(
-				System.getProperty("user.dir") + "\\src\\test\\resources\\testdata\\config.properties");
-		prop.load(fis);
+//		prop = new Properties();
+//		fis = new FileInputStream(
+//				System.getProperty("user.dir") + "\\src\\test\\resources\\testdata\\config.properties");
+//		prop.load(fis);
 	}
 
 	public static WebDriver getDriver() {
@@ -37,13 +37,13 @@ public class BaseDriver {
 	}
 
 	public void launchBrowser() {
-		if (prop.getProperty("browser").equalsIgnoreCase("chrome")) {
+		if (System.getProperty("browser").equalsIgnoreCase("chrome")) {
 			WebDriverManager.chromedriver().setup();
 			driver.set(new ChromeDriver());
-		} else if (prop.getProperty("browser").equalsIgnoreCase("edge")) {
+		} else if (System.getProperty("browser").equalsIgnoreCase("edge")) {
 			WebDriverManager.firefoxdriver().setup();
 			driver.set(new FirefoxDriver());
-		} else if (prop.getProperty("browser").equalsIgnoreCase("chrome")) {
+		} else if (System.getProperty("browser").equalsIgnoreCase("chrome")) {
 			WebDriverManager.edgedriver().setup();
 			driver.set(new EdgeDriver());
 		} else {
@@ -52,7 +52,7 @@ public class BaseDriver {
 		getDriver().manage().window().maximize();
 		getDriver().manage().deleteAllCookies();
 //		getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5000));
-		getDriver().get(prop.getProperty("url"));
+		getDriver().get(prop.getProperty(System.getProperty("url")));
 	}
 	@AfterSuite
 	public void afterSuite() {
